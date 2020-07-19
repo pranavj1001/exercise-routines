@@ -2,4 +2,6 @@
     <string name="app_name">Exercise Routines</string>
     <string name="search_hint_text">Search:</string>
     <string name="search_button_text">Go</string>
+    <string name="routine_input_text">Routine Name</string>
+    <string name="save_button_text">Save</string>
 </resources>
