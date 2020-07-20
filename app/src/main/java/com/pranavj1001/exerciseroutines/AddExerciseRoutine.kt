@@ -20,30 +20,34 @@ class AddExerciseRoutine : AppCompatActivity() {
         overridePendingTransition(0,0)
     }
 
-    private fun validateRoutineObject(routineObject: RoutineBody): Boolean {
-        return true
-    }
-
     /**
      * Saves data in json format in phones internal storage
-     * */
+     */
     fun saveRoutine(view: View) {
 
         // prepare file contents
         val routineObject = RoutineBody()
-        routineObject.name = findViewById<EditText>(R.id.routineNameText).toString()
+        routineObject.name = findViewById<EditText>(R.id.routineNameText).text.toString()
         val fileContents = Gson().toJson(routineObject)
 
         if (validateRoutineObject(routineObject)) {
-            val dir = applicationContext.getDir("RoutineData", Context.MODE_PRIVATE)
-
-            applicationContext.openFileOutput(dir.absolutePath + routineObject.name, Context.MODE_PRIVATE).use {
+            applicationContext.openFileOutput(routineObject.name, Context.MODE_PRIVATE).use {
                 it.write(fileContents.toByteArray())
             }
 
         } else {
             // TODO: Show an Error Alert and revert action
         }
+    }
+
+    /**
+     * Validates routineObject which is to be saved
+     */
+    private fun validateRoutineObject(routineObject: RoutineBody): Boolean {
+        if (routineObject.name == "") {
+            return false
+        }
+        return true
     }
 
 }

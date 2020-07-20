@@ -1,8 +1,10 @@
 package com.pranavj1001.exerciseroutines
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 
@@ -11,14 +13,28 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        loadRoutines()
     }
 
+    /**
+     * Launches a new activity which creates/edits a routine
+     */
     fun addExerciseRoutine(view: View) {
         val searchText = findViewById<EditText>(R.id.searchText)
         val message = searchText.text.toString()
         val intent = Intent(this, AddExerciseRoutine::class.java)
         startActivity(intent)
         overridePendingTransition(0,0)
+    }
+
+    /**
+     * Fetches all routines from internal storage and prepares recycler view
+     */
+    private fun loadRoutines() {
+
+        val routines = applicationContext.fileList()
+        Log.v(getString(R.string.project_internal_code), routines.toString())
+        Log.v(getString(R.string.project_internal_code), routines.size.toString())
     }
 
 }

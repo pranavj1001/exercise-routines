@@ -4,4 +4,6 @@
     <string name="search_button_text">Go</string>
     <string name="routine_input_text">Routine Name</string>
     <string name="save_button_text">Save</string>
+    <string name="app_internal_storage_routine_dir">RoutinesData</string>
+    <string name="project_internal_code">KINDLE</string>
 </resources>
