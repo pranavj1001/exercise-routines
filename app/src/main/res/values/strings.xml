@@ -6,4 +6,5 @@
     <string name="save_button_text">Save</string>
     <string name="app_internal_storage_routine_dir">RoutinesData</string>
     <string name="project_internal_code">KINDLE</string>
+    <string name="empty_list_message">No workouts yet!</string>
 </resources>

@@ -7,34 +7,55 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var routines: Array<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         loadRoutines()
+
+        viewManager = LinearLayoutManager(this)
+        viewAdapter = RecyclerViewAdapter(routines)
+
+        recyclerView = findViewById<RecyclerView>(R.id.exerciseRoutineList).apply {
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+
+            // use a linear layout manager
+            layoutManager = viewManager
+
+            // specify an viewAdapter (see also next example)
+            adapter = viewAdapter
+
+        }
     }
 
     /**
      * Launches a new activity which creates/edits a routine
      */
     fun addExerciseRoutine(view: View) {
-        val searchText = findViewById<EditText>(R.id.searchText)
-        val message = searchText.text.toString()
         val intent = Intent(this, AddExerciseRoutine::class.java)
         startActivity(intent)
         overridePendingTransition(0,0)
     }
 
     /**
-     * Fetches all routines from internal storage and prepares recycler view
+     * Fetches all routines from internal storage
      */
     private fun loadRoutines() {
-
-        val routines = applicationContext.fileList()
-        Log.v(getString(R.string.project_internal_code), routines.toString())
-        Log.v(getString(R.string.project_internal_code), routines.size.toString())
+        routines = applicationContext.fileList()
+        if (routines.isEmpty()) {
+            routines.plus(getString(R.string.empty_list_message))
+        }
     }
 
 }
