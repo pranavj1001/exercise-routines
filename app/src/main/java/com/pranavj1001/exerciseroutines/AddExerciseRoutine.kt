@@ -1,6 +1,7 @@
 package com.pranavj1001.exerciseroutines
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -34,6 +35,10 @@ class AddExerciseRoutine : AppCompatActivity() {
             applicationContext.openFileOutput(routineObject.name, Context.MODE_PRIVATE).use {
                 it.write(fileContents.toByteArray())
             }
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0,0)
 
         } else {
             // TODO: Show an Error Alert and revert action
