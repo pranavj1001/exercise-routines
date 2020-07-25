@@ -15,7 +15,8 @@ class RecyclerViewAdapter(private val routines: Array<RoutineBody>) :
     // Each data item is just a string in this case that is shown in a TextView.
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         // each data item is just a string in this case
-        var mTextView: TextView = view.findViewById(R.id.listItem)
+        var listItemName: TextView = view.findViewById(R.id.listItemName)
+        var listItemDuration: TextView = view.findViewById(R.id.listItemDuration)
     }
 
     // Create new views (invoked by the layout manager)
@@ -30,7 +31,12 @@ class RecyclerViewAdapter(private val routines: Array<RoutineBody>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.mTextView.text = routines[position].name
+        holder.listItemName.text = routines[position].name
+        if (routines[position].time.isEmpty()) {
+            holder.listItemDuration.text = "No time related information found."
+        } else {
+            holder.listItemDuration.text = routines[position].time
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)

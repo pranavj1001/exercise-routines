@@ -5,10 +5,20 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/listItem"
+        android:id="@+id/listItemName"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
         android:textColor="@android:color/background_light"
         android:textColorHint="@android:color/background_light"
         android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/listItemDuration"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:textColor="#ccc"
+        android:textColorHint="#ccc"
+        android:textSize="12sp" />
+
 </LinearLayout>
