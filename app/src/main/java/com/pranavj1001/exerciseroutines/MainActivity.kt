@@ -9,12 +9,13 @@ import android.view.View
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var routines: Array<String>
+    private lateinit var routines: Array<RoutineBody>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,9 +53,22 @@ class MainActivity : AppCompatActivity() {
      * Fetches all routines from internal storage
      */
     private fun loadRoutines() {
-        routines = applicationContext.fileList()
-        if (routines.isEmpty()) {
-            routines.plus(getString(R.string.empty_list_message))
+        val routineNames = applicationContext.fileList()
+        routines = emptyArray();
+        if (routineNames.isEmpty()) {
+            var routineObject = RoutineBody()
+            routineObject.name = getString(R.string.empty_list_message)
+            routines = routines.plusElement(routineObject)
+        } else {
+            for (routineName in routineNames) {
+                val routineData: String = applicationContext.openFileInput(routineName).bufferedReader().useLines { lines ->
+                    lines.fold("") { some, text ->
+                        "$some\n$text"
+                    }
+                }
+                val routineObject = Gson().fromJson(routineData, RoutineBody::class.java)
+                routines = routines.plusElement(routineObject)
+            }
         }
     }
 

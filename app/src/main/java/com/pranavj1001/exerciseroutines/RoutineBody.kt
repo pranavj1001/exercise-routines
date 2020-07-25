@@ -1,5 +1,5 @@
 package com.pranavj1001.exerciseroutines
 
-class RoutineBody {
+class RoutineBody() {
     var name = ""
 }

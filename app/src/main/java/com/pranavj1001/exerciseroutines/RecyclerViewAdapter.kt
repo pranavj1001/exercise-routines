@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerViewAdapter(private val routines: Array<String>) :
+class RecyclerViewAdapter(private val routines: Array<RoutineBody>) :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     // Provide a reference to the views for each data item
@@ -30,7 +30,7 @@ class RecyclerViewAdapter(private val routines: Array<String>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.mTextView.text = routines[position]
+        holder.mTextView.text = routines[position].name
     }
 
     // Return the size of your dataset (invoked by the layout manager)
