@@ -1,12 +1,9 @@
 package com.pranavj1001.exerciseroutines
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -24,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         loadRoutines()
 
         viewManager = LinearLayoutManager(this)
-        viewAdapter = RecyclerViewAdapter(routines)
+        viewAdapter = RoutinesRecyclerViewAdapter(routines)
 
         recyclerView = findViewById<RecyclerView>(R.id.exerciseRoutineList).apply {
             // use this setting to improve performance if you know that changes

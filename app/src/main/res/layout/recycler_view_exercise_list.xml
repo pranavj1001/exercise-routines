@@ -13,7 +13,7 @@
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:textColor="@android:color/background_light"
-        android:textColorHint="@android:color/background_light" />
+        android:textColorHint="@android:color/darker_gray" />
 
     <EditText
         android:id="@+id/exerciseDuration"
@@ -23,6 +23,7 @@
         android:hint="@string/exercise_time_hint_text"
         android:importantForAutofill="no"
         android:inputType="time"
+        android:maxLength="5"
         android:textColor="@android:color/background_light"
-        android:textColorHint="@android:color/background_light" />
+        android:textColorHint="@android:color/darker_gray" />
 </LinearLayout>

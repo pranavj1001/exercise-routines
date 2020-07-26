@@ -6,13 +6,38 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 
 class AddExerciseRoutine : AppCompatActivity() {
 
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var exercises: Array<ExerciseBody>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_exercise_routine)
+
+        loadExercises()
+
+        viewManager = LinearLayoutManager(this)
+        viewAdapter = ExercisesRecyclerViewAdapter(exercises)
+
+        recyclerView = findViewById<RecyclerView>(R.id.excercisesList).apply {
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+
+            // use a linear layout manager
+            layoutManager = viewManager
+
+            // specify an viewAdapter (see also next example)
+            adapter = viewAdapter
+
+        }
     }
 
     // disable animation which is triggered when we switch to another activity
@@ -46,6 +71,13 @@ class AddExerciseRoutine : AppCompatActivity() {
     }
 
     /**
+     * Adds a new exercise in the current routine
+     */
+    fun addExercise(view: View) {
+        exercises = exercises.plusElement(ExerciseBody())
+    }
+
+    /**
      * Validates routineObject which is to be saved
      */
     private fun validateRoutineObject(routineObject: RoutineBody): Boolean {
@@ -53,6 +85,15 @@ class AddExerciseRoutine : AppCompatActivity() {
             return false
         }
         return true
+    }
+
+    /**
+     * Loads Exercises from routine if present
+     */
+    private fun loadExercises() {
+        exercises = emptyArray()
+
+        // TODO: If data is present then make load all exercises
     }
 
 }

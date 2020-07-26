@@ -7,4 +7,6 @@
     <string name="app_internal_storage_routine_dir">RoutinesData</string>
     <string name="project_internal_code">KINDLE</string>
     <string name="empty_list_message">No workouts yet!</string>
+    <string name="exercise_hint_text">Exercise Name</string>
+    <string name="exercise_time_hint_text">00:20</string>
 </resources>

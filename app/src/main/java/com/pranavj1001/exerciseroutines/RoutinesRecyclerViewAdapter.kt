@@ -42,3 +42,40 @@ class RoutinesRecyclerViewAdapter(private val routines: Array<RoutineBody>) :
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = routines.size
 }
+
+class ExercisesRecyclerViewAdapter(private val exercises: Array<ExerciseBody>) :
+    RecyclerView.Adapter<ExercisesRecyclerViewAdapter.ViewHolder>() {
+
+    // Provide a reference to the views for each data item
+    // Complex data items may need more than one view per item, and
+    // you provide access to all the views for a data item in a view holder.
+    // Each data item is just a string in this case that is shown in a TextView.
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        // each data item is just a string in this case
+        var listItemName: TextView = view.findViewById(R.id.exerciseName)
+        var listItemDuration: TextView = view.findViewById(R.id.exerciseDuration)
+    }
+
+    // Create new views (invoked by the layout manager)
+    override fun onCreateViewHolder(parent: ViewGroup,
+                                    viewType: Int): ExercisesRecyclerViewAdapter.ViewHolder {
+        // create a new view
+        return ViewHolder(LayoutInflater.from(parent.context)
+            .inflate(R.layout.recycler_view_exercise_list, parent, false))
+    }
+
+    // Replace the contents of a view (invoked by the layout manager)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        // - get element from your dataset at this position
+        // - replace the contents of the view with that element
+        holder.listItemName.text = exercises[position].name
+        holder.listItemDuration.text = exercises[position].time
+    }
+
+    // Return the size of your dataset (invoked by the layout manager)
+    override fun getItemCount() = exercises.size
+
+    fun updateList() {
+        notifyDataSetChanged()
+    }
+}
