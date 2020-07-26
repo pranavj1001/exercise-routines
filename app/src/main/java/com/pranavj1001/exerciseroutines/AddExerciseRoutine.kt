@@ -13,9 +13,9 @@ import com.google.gson.Gson
 class AddExerciseRoutine : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewAdapter: ExercisesRecyclerViewAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var exercises: Array<ExerciseBody>
+    private var exercises: Array<ExerciseBody> = emptyArray()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +75,8 @@ class AddExerciseRoutine : AppCompatActivity() {
      */
     fun addExercise(view: View) {
         exercises = exercises.plusElement(ExerciseBody())
+        viewAdapter.setExercises(exercises)
+        viewAdapter.notifyDataSetChanged()
     }
 
     /**
@@ -91,8 +93,6 @@ class AddExerciseRoutine : AppCompatActivity() {
      * Loads Exercises from routine if present
      */
     private fun loadExercises() {
-        exercises = emptyArray()
-
         // TODO: If data is present then make load all exercises
     }
 

@@ -43,7 +43,7 @@ class RoutinesRecyclerViewAdapter(private val routines: Array<RoutineBody>) :
     override fun getItemCount() = routines.size
 }
 
-class ExercisesRecyclerViewAdapter(private val exercises: Array<ExerciseBody>) :
+class ExercisesRecyclerViewAdapter(private var exercises: Array<ExerciseBody>) :
     RecyclerView.Adapter<ExercisesRecyclerViewAdapter.ViewHolder>() {
 
     // Provide a reference to the views for each data item
@@ -75,7 +75,11 @@ class ExercisesRecyclerViewAdapter(private val exercises: Array<ExerciseBody>) :
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = exercises.size
 
-    fun updateList() {
-        notifyDataSetChanged()
+    override fun registerAdapterDataObserver(observer: RecyclerView.AdapterDataObserver) {
+        super.registerAdapterDataObserver(observer)
+    }
+
+    fun setExercises(exercisesData: Array<ExerciseBody>) {
+        exercises = exercisesData
     }
 }
