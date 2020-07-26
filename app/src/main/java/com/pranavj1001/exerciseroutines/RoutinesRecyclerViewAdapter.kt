@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerViewAdapter(private val routines: Array<RoutineBody>) :
-    RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RoutinesRecyclerViewAdapter(private val routines: Array<RoutineBody>) :
+    RecyclerView.Adapter<RoutinesRecyclerViewAdapter.ViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -21,7 +21,7 @@ class RecyclerViewAdapter(private val routines: Array<RoutineBody>) :
 
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): RecyclerViewAdapter.ViewHolder {
+                                    viewType: Int): RoutinesRecyclerViewAdapter.ViewHolder {
         // create a new view
         return ViewHolder(LayoutInflater.from(parent.context)
             .inflate(R.layout.recycler_view_routine_list, parent, false))
