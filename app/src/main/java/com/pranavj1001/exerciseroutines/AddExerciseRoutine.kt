@@ -1,11 +1,13 @@
 package com.pranavj1001.exerciseroutines
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -52,11 +54,11 @@ class AddExerciseRoutine : AppCompatActivity() {
     fun saveRoutine(view: View) {
 
         // prepare file contents
-        val routineObject = RoutineBody()
-        routineObject.name = findViewById<EditText>(R.id.routineNameText).text.toString()
+        val routineObject = prepareRoutineObject()
         val fileContents = Gson().toJson(routineObject)
+        val validationString = validateRoutineObject(routineObject)
 
-        if (validateRoutineObject(routineObject)) {
+        if (validationString.isEmpty()) {
             applicationContext.openFileOutput(routineObject.name, Context.MODE_PRIVATE).use {
                 it.write(fileContents.toByteArray())
             }
@@ -66,7 +68,15 @@ class AddExerciseRoutine : AppCompatActivity() {
             overridePendingTransition(0,0)
 
         } else {
-            // TODO: Show an Error Alert and revert action
+            val builder = AlertDialog.Builder(this)
+                .setTitle(getString(R.string.err_title_invalid_routine))
+                .setMessage(validationString)
+            builder.setCancelable(true)
+            builder.setPositiveButton(R.string.alert_positive_button_text)
+                { dialog, id -> dialog.cancel() }
+
+            val alert = builder.create()
+            alert.show()
         }
     }
 
@@ -79,14 +89,25 @@ class AddExerciseRoutine : AppCompatActivity() {
         viewAdapter.notifyDataSetChanged()
     }
 
+
+    /**
+     * Prepares the object of a Routine
+     */
+    private fun prepareRoutineObject(): RoutineBody {
+        val routineObject = RoutineBody()
+        routineObject.name = findViewById<EditText>(R.id.routineNameText).text.toString()
+        return routineObject
+    }
+
     /**
      * Validates routineObject which is to be saved
      */
-    private fun validateRoutineObject(routineObject: RoutineBody): Boolean {
+    private fun validateRoutineObject(routineObject: RoutineBody): String {
+        var validationString: String = ""
         if (routineObject.name == "") {
-            return false
+            validationString += "Routine name cannot be Empty"
         }
-        return true
+        return validationString
     }
 
     /**

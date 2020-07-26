@@ -9,4 +9,6 @@
     <string name="empty_list_message">No workouts yet!</string>
     <string name="exercise_hint_text">Exercise Name</string>
     <string name="exercise_time_hint_text">00:20</string>
+    <string name="err_title_invalid_routine">Invalid Routine Data</string>
+    <string name="alert_positive_button_text">OK</string>
 </resources>
