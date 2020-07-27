@@ -96,6 +96,7 @@ class AddExerciseRoutine : AppCompatActivity() {
     private fun prepareRoutineObject(): RoutineBody {
         val routineObject = RoutineBody()
         routineObject.name = findViewById<EditText>(R.id.routineNameText).text.toString()
+        routineObject.exercises = exercises
         return routineObject
     }
 
