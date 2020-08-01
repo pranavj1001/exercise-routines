@@ -108,6 +108,9 @@ class AddExerciseRoutine : AppCompatActivity() {
         if (routineObject.name == "") {
             validationString += "Routine name cannot be Empty"
         }
+        if (routineObject.exercises.size > 0) {
+            
+        }
         return validationString
     }
 
