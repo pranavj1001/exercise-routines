@@ -96,7 +96,7 @@ class AddExerciseRoutine : AppCompatActivity() {
     private fun prepareRoutineObject(): RoutineBody {
         val routineObject = RoutineBody()
         routineObject.name = findViewById<EditText>(R.id.routineNameText).text.toString()
-        routineObject.exercises = exercises
+        routineObject.exercises = viewAdapter.getExercises()
         return routineObject
     }
 
@@ -125,7 +125,7 @@ class AddExerciseRoutine : AppCompatActivity() {
                 validationString += "\nPlease add names for exercise number: " + nameIndexes.joinToString(", ")
             }
             if (timeIndexes.isNotEmpty()) {
-                validationString += "\nPlease add durations for exercise number: " + nameIndexes.joinToString(", ")
+                validationString += "\nPlease add durations for exercise number: " + timeIndexes.joinToString(", ")
             }
         }
         return validationString

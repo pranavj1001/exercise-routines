@@ -1,10 +1,13 @@
 package com.pranavj1001.exerciseroutines
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+
 
 class RoutinesRecyclerViewAdapter(private val routines: Array<RoutineBody>) :
     RecyclerView.Adapter<RoutinesRecyclerViewAdapter.ViewHolder>() {
@@ -70,16 +73,46 @@ class ExercisesRecyclerViewAdapter(private var exercises: Array<ExerciseBody>) :
         // - replace the contents of the view with that element
         holder.listItemName.text = exercises[position].name
         holder.listItemDuration.text = exercises[position].time
+
+        holder.listItemName.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+                exercises[position].name = holder.listItemName.text.toString()
+            }
+        })
+
+        holder.listItemDuration.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+                exercises[position].time = holder.listItemDuration.text.toString()
+            }
+        })
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = exercises.size
 
-    override fun registerAdapterDataObserver(observer: RecyclerView.AdapterDataObserver) {
-        super.registerAdapterDataObserver(observer)
-    }
-
     fun setExercises(exercisesData: Array<ExerciseBody>) {
         exercises = exercisesData
     }
+
+    fun getExercises() = exercises
 }
