@@ -106,10 +106,27 @@ class AddExerciseRoutine : AppCompatActivity() {
     private fun validateRoutineObject(routineObject: RoutineBody): String {
         var validationString: String = ""
         if (routineObject.name == "") {
-            validationString += "Routine name cannot be Empty"
+            validationString += "\nRoutine name cannot be Empty"
         }
-        if (routineObject.exercises.size > 0) {
-            
+        if (routineObject.exercises.isNotEmpty()) {
+            var nameIndexes = emptyArray<Number>()
+            var timeIndexes = emptyArray<Number>()
+            var pos = 1
+            for (exercise in routineObject.exercises) {
+                if (exercise.name.isEmpty()) {
+                    nameIndexes = nameIndexes.plusElement(pos);
+                }
+                if (exercise.time.isEmpty()) {
+                    timeIndexes = timeIndexes.plusElement(pos);
+                }
+                pos++;
+            }
+            if (nameIndexes.isNotEmpty()) {
+                validationString += "\nPlease add names for exercise number: " + nameIndexes.joinToString(", ")
+            }
+            if (timeIndexes.isNotEmpty()) {
+                validationString += "\nPlease add durations for exercise number: " + nameIndexes.joinToString(", ")
+            }
         }
         return validationString
     }
