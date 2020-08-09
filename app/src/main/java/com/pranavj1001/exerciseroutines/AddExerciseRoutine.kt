@@ -17,13 +17,15 @@ class AddExerciseRoutine : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: ExercisesRecyclerViewAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private var exercises: Array<ExerciseBody> = emptyArray()
+    private lateinit var exercises: Array<ExerciseBody>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_exercise_routine)
 
-        loadExercises()
+        // Get the Intent that started this activity and extract the string
+        val message = intent.getStringExtra(R.string.app_intent_key.toString())
+        loadExercises(message)
 
         viewManager = LinearLayoutManager(this)
         viewAdapter = ExercisesRecyclerViewAdapter(exercises)
@@ -134,8 +136,18 @@ class AddExerciseRoutine : AppCompatActivity() {
     /**
      * Loads Exercises from routine if present
      */
-    private fun loadExercises() {
-        // TODO: If data is present then make load all exercises
+    private fun loadExercises(routineName: String) {
+        if (routineName.isNotEmpty()) {
+            val routineData: String = applicationContext.openFileInput(routineName).bufferedReader().useLines { lines ->
+                lines.fold("") { some, text ->
+                    "$some\n$text"
+                }
+            }
+            val routineObject = Gson().fromJson(routineData, RoutineBody::class.java)
+            exercises = routineObject.exercises
+        } else {
+            exercises = emptyArray()
+        }
     }
 
 }

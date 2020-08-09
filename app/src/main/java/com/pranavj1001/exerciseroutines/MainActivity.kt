@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
 import com.google.gson.Gson
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -46,20 +45,44 @@ class MainActivity : AppCompatActivity() {
             RecyclerItemClickListener(applicationContext, recyclerView, object : RecyclerItemClickListener.OnItemClickListener {
                 override fun onItemClick(view: View?, position: Int) {
                     Toast.makeText(applicationContext, "clicked!", Toast.LENGTH_SHORT).show()
+                    runRoutine(position)
                 }
 
                 override fun onLongItemClick(view: View?, position: Int) {
                     Toast.makeText(applicationContext, "long clicked!", Toast.LENGTH_SHORT).show()
+                    editExerciseRoutine(position)
                 }
             })
         )
     }
 
     /**
-     * Launches a new activity which creates/edits a routine
+     * Launches a new activity which creates a routine
      */
     fun addExerciseRoutine(view: View) {
         val intent = Intent(this, AddExerciseRoutine::class.java)
+        startActivity(intent)
+        overridePendingTransition(0,0)
+    }
+
+    /**
+     * Launches a new activity which edits a routine
+     */
+    fun editExerciseRoutine(position: Int) {
+        val intent = Intent(this, AddExerciseRoutine::class.java).apply {
+            putExtra(R.string.app_intent_key.toString(), routines[position].name)
+        }
+        startActivity(intent)
+        overridePendingTransition(0,0)
+    }
+
+    /**
+     * Launches a new activity which deals with launching the new activity
+     */
+    private fun runRoutine(position: Int) {
+        val intent = Intent(this, RunRoutine::class.java).apply {
+            putExtra(R.string.app_intent_key.toString(), routines[position].name)
+        }
         startActivity(intent)
         overridePendingTransition(0,0)
     }
@@ -85,48 +108,5 @@ class MainActivity : AppCompatActivity() {
                 routines = routines.plusElement(routineObject)
             }
         }
-    }
-
-}
-
-
-class RecyclerItemClickListener(
-    context: Context?,
-    recyclerView: RecyclerView,
-    private val mListener: OnItemClickListener?
-) :
-    OnItemTouchListener {
-
-    interface OnItemClickListener {
-        fun onItemClick(view: View?, position: Int)
-        fun onLongItemClick(view: View?, position: Int)
-    }
-
-    var mGestureDetector: GestureDetector
-    override fun onInterceptTouchEvent(view: RecyclerView, e: MotionEvent): Boolean {
-        val childView = view.findChildViewUnder(e.x, e.y)
-        if (childView != null && mListener != null && mGestureDetector.onTouchEvent(e)) {
-            mListener.onItemClick(childView, view.getChildAdapterPosition(childView))
-            return true
-        }
-        return false
-    }
-
-    override fun onTouchEvent(view: RecyclerView, motionEvent: MotionEvent) {}
-    override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {}
-
-    init {
-        mGestureDetector = GestureDetector(context, object : SimpleOnGestureListener() {
-            override fun onSingleTapUp(e: MotionEvent): Boolean {
-                return true
-            }
-
-            override fun onLongPress(e: MotionEvent) {
-                val child = recyclerView.findChildViewUnder(e.x, e.y)
-                if (child != null && mListener != null) {
-                    mListener.onLongItemClick(child, recyclerView.getChildAdapterPosition(child))
-                }
-            }
-        })
     }
 }
