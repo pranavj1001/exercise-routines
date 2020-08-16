@@ -1,18 +1,18 @@
 package com.pranavj1001.exerciseroutines
 
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
+import java.io.File
 
 class AddExerciseRoutine : AppCompatActivity() {
 
@@ -20,14 +20,15 @@ class AddExerciseRoutine : AppCompatActivity() {
     private lateinit var viewAdapter: ExercisesRecyclerViewAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var exercises: Array<ExerciseBody>
+    private lateinit var routineName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_exercise_routine)
 
         // Get the Intent that started this activity and extract the string
-        val message = intent.getStringExtra(R.string.app_intent_key.toString())
-        loadExercises(message)
+        routineName = intent.getStringExtra(R.string.app_intent_key.toString())
+        loadExercises(routineName)
 
         viewManager = LinearLayoutManager(this)
         viewAdapter = ExercisesRecyclerViewAdapter(exercises)
@@ -115,6 +116,10 @@ class AddExerciseRoutine : AppCompatActivity() {
      */
     private fun deleteRoutineFromStorage() {
         Toast.makeText(applicationContext, "Attempting to delete", Toast.LENGTH_SHORT).show()
+
+        val dir: File = filesDir
+        val file = File(dir, routineName)
+        val deleted: Boolean = file.delete()
 
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
