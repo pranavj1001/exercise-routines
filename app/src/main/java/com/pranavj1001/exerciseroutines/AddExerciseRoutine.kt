@@ -115,15 +115,19 @@ class AddExerciseRoutine : AppCompatActivity() {
      * Deletes the Routine from Phone Storage
      */
     private fun deleteRoutineFromStorage() {
-        Toast.makeText(applicationContext, "Attempting to delete", Toast.LENGTH_SHORT).show()
 
         val dir: File = filesDir
         val file = File(dir, routineName)
         val deleted: Boolean = file.delete()
 
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        overridePendingTransition(0,0)
+        if (deleted) {
+            Toast.makeText(applicationContext, "$routineName Deleted!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0,0)
+        } else {
+            Toast.makeText(applicationContext, "Could not delete $routineName", Toast.LENGTH_SHORT).show()
+        }
     }
 
     /**
