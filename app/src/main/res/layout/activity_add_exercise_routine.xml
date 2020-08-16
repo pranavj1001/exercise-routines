@@ -33,7 +33,7 @@
         app:layout_constraintBottom_toTopOf="@+id/saveFloatingRoutineButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:rippleColor="@android:color/holo_blue_bright"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_delete" />
 
     <EditText
         android:id="@+id/routineNameText"

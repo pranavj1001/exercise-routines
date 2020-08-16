@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 
 class AddExerciseRoutine : AppCompatActivity() {
@@ -92,12 +94,32 @@ class AddExerciseRoutine : AppCompatActivity() {
     }
 
     /**
-     * Removes the routine
+     * Opens an alert and asks user to whether it wants to delete the routine or not
      */
     fun removeRoutine(view: View) {
+        val builder = AlertDialog.Builder(this)
+            .setTitle(getString(R.string.err_title_invalid_routine))
+            .setMessage(R.string.alert_delete_text)
+        builder.setCancelable(true)
+        builder.setPositiveButton(R.string.alert_negative_button_text)
+        { dialog, id -> dialog.cancel() }
+        builder.setNegativeButton(R.string.alert_positive_button_text)
+        { dialog, id -> deleteRoutineFromStorage() }
 
+        val alert = builder.create()
+        alert.show()
     }
 
+    /**
+     * Deletes the Routine from Phone Storage
+     */
+    private fun deleteRoutineFromStorage() {
+        Toast.makeText(applicationContext, "Attempting to delete", Toast.LENGTH_SHORT).show()
+
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(0,0)
+    }
 
     /**
      * Prepares the object of a Routine
@@ -153,6 +175,8 @@ class AddExerciseRoutine : AppCompatActivity() {
             val routineObject = Gson().fromJson(routineData, RoutineBody::class.java)
             exercises = routineObject.exercises
         } else {
+            val deleteFloatingButton = findViewById<FloatingActionButton>(R.id.deleteFloatingRoutineButton)
+            deleteFloatingButton.hide()
             exercises = emptyArray()
         }
     }

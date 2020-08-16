@@ -12,4 +12,6 @@
     <string name="err_title_invalid_routine">Invalid Routine Data</string>
     <string name="alert_positive_button_text">OK</string>
     <string name="app_intent_key">KINDLE_MESSAGE</string>
+    <string name="alert_delete_text">Are you sure you want to delete this Routine?</string>
+    <string name="alert_negative_button_text">NO</string>
 </resources>

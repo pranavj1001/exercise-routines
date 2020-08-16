@@ -56,6 +56,12 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    // disable animation which is triggered when we switch to another activity
+    override fun onPause() {
+        super.onPause()
+        overridePendingTransition(0,0)
+    }
+
     /**
      * Launches a new activity which creates a routine
      */
