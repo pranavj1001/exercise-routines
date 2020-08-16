@@ -91,6 +91,13 @@ class AddExerciseRoutine : AppCompatActivity() {
         viewAdapter.notifyDataSetChanged()
     }
 
+    /**
+     * Removes the routine
+     */
+    fun removeRoutine(view: View) {
+
+    }
+
 
     /**
      * Prepares the object of a Routine
@@ -136,8 +143,8 @@ class AddExerciseRoutine : AppCompatActivity() {
     /**
      * Loads Exercises from routine if present
      */
-    private fun loadExercises(routineName: String) {
-        if (routineName.isNotEmpty()) {
+    private fun loadExercises(routineName: String?) {
+        if (!routineName.isNullOrBlank()) {
             val routineData: String = applicationContext.openFileInput(routineName).bufferedReader().useLines { lines ->
                 lines.fold("") { some, text ->
                     "$some\n$text"
