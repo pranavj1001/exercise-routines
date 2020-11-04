@@ -66,7 +66,9 @@ class MainActivity : AppCompatActivity() {
      * Launches a new activity which creates a routine
      */
     fun addExerciseRoutine(view: View) {
-        val intent = Intent(this, AddExerciseRoutine::class.java)
+        val intent = Intent(this, AddExerciseRoutine::class.java).apply {
+            putExtra(R.string.app_intent_key.toString(), "")
+        }
         startActivity(intent)
         overridePendingTransition(0,0)
     }

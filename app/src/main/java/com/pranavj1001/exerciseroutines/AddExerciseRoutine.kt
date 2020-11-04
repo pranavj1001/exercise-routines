@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -99,7 +100,7 @@ class AddExerciseRoutine : AppCompatActivity() {
      */
     fun removeRoutine(view: View) {
         val builder = AlertDialog.Builder(this)
-            .setTitle(getString(R.string.err_title_invalid_routine))
+            .setTitle(getString(R.string.alert_warning_heading))
             .setMessage(R.string.alert_delete_text)
         builder.setCancelable(true)
         builder.setPositiveButton(R.string.alert_negative_button_text)
@@ -182,6 +183,9 @@ class AddExerciseRoutine : AppCompatActivity() {
                 }
             }
             val routineObject = Gson().fromJson(routineData, RoutineBody::class.java)
+            val routineNameTextView = findViewById<TextView>(R.id.routineNameText)
+            routineNameTextView.setText(routineObject.name).toString()
+
             exercises = routineObject.exercises
         } else {
             val deleteFloatingButton = findViewById<FloatingActionButton>(R.id.deleteFloatingRoutineButton)
