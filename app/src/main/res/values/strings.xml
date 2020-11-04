@@ -15,4 +15,9 @@
     <string name="alert_delete_text">Are you sure you want to delete this Routine?</string>
     <string name="alert_negative_button_text">NO</string>
     <string name="alert_warning_heading">Warning</string>
+    <string name="timer_separator">:</string>
+    <string name="previous_button_text">prev</string>
+    <string name="pause_button_text">Pause</string>
+    <string name="next_button_text">Next</string>
+    <string name="play_button_text">Play</string>
 </resources>
