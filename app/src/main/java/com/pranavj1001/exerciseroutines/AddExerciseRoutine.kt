@@ -35,9 +35,6 @@ class AddExerciseRoutine : AppCompatActivity() {
         viewAdapter = ExercisesRecyclerViewAdapter(exercises)
 
         recyclerView = findViewById<RecyclerView>(R.id.excercisesList).apply {
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
-            setHasFixedSize(true)
 
             // use a linear layout manager
             layoutManager = viewManager
@@ -90,9 +87,13 @@ class AddExerciseRoutine : AppCompatActivity() {
      * Adds a new exercise in the current routine
      */
     fun addExercise(view: View) {
-        exercises = exercises.plusElement(ExerciseBody())
+        exercises = exercises.plus(ExerciseBody())
         viewAdapter.setExercises(exercises)
-        viewAdapter.notifyDataSetChanged()
+        if (exercises.size == 1) {
+            viewAdapter.notifyDataSetChanged()
+        } else {
+            viewAdapter.notifyItemInserted(exercises.size - 1)
+        }
     }
 
     /**
