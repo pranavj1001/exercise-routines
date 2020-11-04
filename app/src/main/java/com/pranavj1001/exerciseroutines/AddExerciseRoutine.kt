@@ -89,11 +89,7 @@ class AddExerciseRoutine : AppCompatActivity() {
     fun addExercise(view: View) {
         exercises = exercises.plus(ExerciseBody())
         viewAdapter.setExercises(exercises)
-        if (exercises.size == 1) {
-            viewAdapter.notifyDataSetChanged()
-        } else {
-            viewAdapter.notifyItemInserted(exercises.size - 1)
-        }
+        viewAdapter.notifyItemInserted(exercises.size - 1)
     }
 
     /**
