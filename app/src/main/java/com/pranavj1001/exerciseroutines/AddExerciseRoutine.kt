@@ -87,7 +87,7 @@ class AddExerciseRoutine : AppCompatActivity() {
      * Adds a new exercise in the current routine
      */
     fun addExercise(view: View) {
-        exercises = exercises.plus(ExerciseBody())
+        exercises = exercises.plusElement(ExerciseBody())
         viewAdapter.setExercises(exercises)
         viewAdapter.notifyItemInserted(exercises.size - 1)
     }

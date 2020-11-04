@@ -68,6 +68,8 @@ class ExercisesRecyclerViewAdapter(private var exercises: Array<ExerciseBody>) :
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.setIsRecyclable(false);
+
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.listItemName.text = exercises[position].name

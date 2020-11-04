@@ -44,12 +44,12 @@ class MainActivity : AppCompatActivity() {
         recyclerView.addOnItemTouchListener(
             RecyclerItemClickListener(applicationContext, recyclerView, object : RecyclerItemClickListener.OnItemClickListener {
                 override fun onItemClick(view: View?, position: Int) {
-                    Toast.makeText(applicationContext, "clicked!", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(applicationContext, "clicked!", Toast.LENGTH_SHORT).show()
                     runRoutine(position)
                 }
 
                 override fun onLongItemClick(view: View?, position: Int) {
-                    Toast.makeText(applicationContext, "long clicked!", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(applicationContext, "long clicked!", Toast.LENGTH_SHORT).show()
                     editExerciseRoutine(position)
                 }
             })
