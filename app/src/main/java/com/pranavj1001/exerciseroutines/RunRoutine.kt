@@ -48,6 +48,7 @@ class RunRoutine : AppCompatActivity() {
      */
     private fun loadRoutine(routineName: String) {
         routineObject = getRoutine(routineName)
+        currentExerciseTimeObject = Time()
         setMetaData(routineObject)
         if (routineObject.exercises.isNotEmpty()) {
             currentExerciseIndex = 0
@@ -61,14 +62,24 @@ class RunRoutine : AppCompatActivity() {
      * Loads the on screen timer as per the given time in seconds
      */
     private fun loadTimer(timeInSeconds: Int) {
+        updateTime(timeInSeconds)
 
+        val hoursTextView = findViewById<TextView>(R.id.hoursValue)
+        val minutesTextView = findViewById<TextView>(R.id.minutesValue)
+        val secondsTextView = findViewById<TextView>(R.id.secondsValue)
+
+        hoursTextView.setText(currentExerciseTimeObject.hours).toString()
+        minutesTextView.setText(currentExerciseTimeObject.minutes).toString()
+        secondsTextView.setText(currentExerciseTimeObject.seconds).toString()
     }
 
     /**
      * Update the timeObject
      */
     private fun updateTime(timeInSeconds: Int) {
-
+        currentExerciseTimeObject.hours = String.format("%02d", (timeInSeconds / 3600));
+        currentExerciseTimeObject.minutes = String.format("%02d", ((timeInSeconds % 3600) / 60));
+        currentExerciseTimeObject.seconds = String.format("%02d", (timeInSeconds % 60));
     }
 
     /**
