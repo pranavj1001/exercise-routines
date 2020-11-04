@@ -2,9 +2,19 @@ package com.pranavj1001.exerciseroutines
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import com.google.gson.Gson
 
 class RunRoutine : AppCompatActivity() {
+
+    private lateinit var routineObject: RoutineBody
+    private lateinit var currentExerciseTimeObject: Time
+    private var currentExerciseIndex: Number = 0
+    private var isPlayMode = true
+    private var isPrevButtonDisabled = false
+    private var isPlayPauseButtonDisabled = false
+    private var isNextButtonDisabled = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -12,7 +22,7 @@ class RunRoutine : AppCompatActivity() {
 
         // Get the Intent that started this activity and extract the string
         val message = intent.getStringExtra(R.string.app_intent_key.toString())
-        runRoutine(message)
+        loadRoutine(message)
     }
 
     // disable animation which is triggered when we switch to another activity
@@ -21,13 +31,64 @@ class RunRoutine : AppCompatActivity() {
         overridePendingTransition(0,0)
     }
 
+    fun goToPreviousExercise(view: View) {
+
+    }
+
+    fun goToNextExercise(view: View) {
+
+    }
+
+    fun togglePlayAndPause(view: View) {
+
+    }
+
     /**
      * Runs the Routine
      */
-    private fun runRoutine(routineName: String) {
-        val routineData = getRoutine(routineName)
+    private fun loadRoutine(routineName: String) {
+        routineObject = getRoutine(routineName)
+        setMetaData(routineObject)
+        if (routineObject.exercises.isNotEmpty()) {
+            currentExerciseIndex = 0
+            loadTimer(routineObject.exercises[0].time.toInt())
+        } else {
+            // TODO: Disable Action Buttons
+        }
     }
 
+    /**
+     * Loads the on screen timer as per the given time in seconds
+     */
+    private fun loadTimer(timeInSeconds: Int) {
+
+    }
+
+    /**
+     * Update the timeObject
+     */
+    private fun updateTime(timeInSeconds: Int) {
+
+    }
+
+    /**
+     * Sets MetaData of the current Routine
+     */
+    private fun setMetaData(routineData: RoutineBody) {
+        val routineNameTextView = findViewById<TextView>(R.id.routineName)
+        routineNameTextView.setText("Current Routine: " + routineData.name).toString()
+        if (routineData.exercises.isEmpty()) {
+            val currentExerciseTextView = findViewById<TextView>(R.id.currentExercise)
+            currentExerciseTextView.setText("No Exercises Found. Please add some Exercises").toString()
+        } else {
+            val currentExerciseTextView = findViewById<TextView>(R.id.currentExercise)
+            currentExerciseTextView.setText("Current Exercise: " + routineData.exercises[0].name).toString()
+        }
+    }
+
+    /**
+     * Gets Current Routine data
+     */
     private fun getRoutine(routineName: String): RoutineBody {
         val routineData: String = applicationContext.openFileInput(routineName).bufferedReader().useLines { lines ->
             lines.fold("") { some, text ->

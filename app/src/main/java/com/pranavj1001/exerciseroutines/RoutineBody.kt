@@ -10,3 +10,9 @@ class ExerciseBody() {
     var name: String = ""
     var time: String = ""
 }
+
+class Time() {
+    var hours: String = ""
+    var minutes: String = ""
+    var seconds: String = ""
+}

@@ -99,18 +99,20 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/colorAccent"
+        android:onClick="goToPreviousExercise"
         android:text="@string/previous_button_text"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/pauseButton" />
+        app:layout_constraintEnd_toStartOf="@+id/playPauseButton" />
 
     <Button
-        android:id="@+id/pauseButton"
+        android:id="@+id/playPauseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/colorAccent"
-        android:text="@string/pause_button_text"
+        android:onClick="togglePlayAndPause"
+        android:text="@string/play_button_text"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -123,8 +125,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/colorAccent"
+        android:onClick="goToNextExercise"
         android:text="@string/next_button_text"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/pauseButton" />
+        app:layout_constraintStart_toEndOf="@+id/playPauseButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
