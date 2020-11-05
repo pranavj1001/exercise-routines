@@ -135,7 +135,31 @@ class AddExerciseRoutine : AppCompatActivity() {
         val routineObject = RoutineBody()
         routineObject.name = findViewById<EditText>(R.id.routineNameText).text.toString()
         routineObject.exercises = viewAdapter.getExercises()
+
+        if (routineObject.exercises.isNotEmpty()) {
+            var time = 0;
+            for (exercise in routineObject.exercises) {
+                if (exercise.time.trim().isNotEmpty()) {
+                    time += exercise.time.toInt()
+                }
+            }
+            if (time > 0) {
+                routineObject.time = prepareTimeString(time)
+            }
+        }
+
         return routineObject
+    }
+
+    /**
+     * Prepare time string for the Routine
+     */
+    private fun prepareTimeString(timeInSeconds: Int): String {
+        val hours = timeInSeconds / 3600
+        val minutes = (timeInSeconds % 3600) / 60
+        val seconds = timeInSeconds % 60
+
+        return String.format("Duration: %02d:%02d:%02d", hours, minutes, seconds)
     }
 
     /**
@@ -151,10 +175,10 @@ class AddExerciseRoutine : AppCompatActivity() {
             var timeIndexes = emptyArray<Number>()
             var pos = 1
             for (exercise in routineObject.exercises) {
-                if (exercise.name.isEmpty()) {
+                if (exercise.name.trim().isEmpty()) {
                     nameIndexes = nameIndexes.plusElement(pos);
                 }
-                if (exercise.time.isEmpty()) {
+                if (exercise.time.trim().isEmpty()) {
                     timeIndexes = timeIndexes.plusElement(pos);
                 }
                 pos++;

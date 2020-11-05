@@ -8,7 +8,6 @@
     <string name="project_internal_code">KINDLE</string>
     <string name="empty_list_message">No workouts yet!</string>
     <string name="exercise_hint_text">Exercise Name</string>
-    <string name="exercise_time_hint_text">00:20</string>
     <string name="err_title_invalid_routine">Invalid Routine Data</string>
     <string name="alert_positive_button_text">OK</string>
     <string name="app_intent_key">KINDLE_MESSAGE</string>
@@ -20,4 +19,5 @@
     <string name="pause_button_text">Pause</string>
     <string name="next_button_text">Next</string>
     <string name="play_button_text">Start</string>
+    <string name="exercise_time_hint_text">Time in seconds</string>
 </resources>
