@@ -16,9 +16,9 @@ It has a very minimal and simplistic design with a dark theme throughout the app
 ## Screenshots and Screen Recording
 
 <p align="middle">
-<img src="ScreenShots/screenshot1.jpg" width="325">
-<img src="ScreenShots/exercise_routine_working.gif" width="325">
-<img src="ScreenShots/screenshot2.jpg" width="325">
+<img src="ScreenShots/screenshot1.jpg" width="275">
+<img src="ScreenShots/exercise_routine_working.gif" width="275">
+<img src="ScreenShots/screenshot2.jpg" width="275">
 </p>
 
 ## Queries?
