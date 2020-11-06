@@ -4,6 +4,13 @@ This is an android application developed in Kotlin. I developed this application
 
 It has a very minimal and simplistic design with a dark theme throughout the application. In this application, we can add/edit/delete a workout/routine and in it we can add/edit exercises along with their time. We can also start a workout/routine, in which a timer is used to run an exercise for a given duration.
 
+## Reasons to try this app
+
+- No login/signup required.
+- Data always stay on your phone.
+- No permissions required.
+- No Internet connection required.
+
 ## Pending Items
 
 - Search Funcationality
